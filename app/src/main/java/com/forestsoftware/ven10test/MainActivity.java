@@ -151,11 +151,11 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
                 {
                     //Now broadcastreceiver will work in background
-                    Toast.makeText(this, "Thankyou for permitting!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Permission granted", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Toast.makeText(this, "Well I can't do anything until you permit me", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Permission is required", Toast.LENGTH_LONG).show();
                 }
             }
         }

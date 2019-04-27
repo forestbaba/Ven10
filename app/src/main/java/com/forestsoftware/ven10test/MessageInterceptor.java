@@ -15,19 +15,8 @@ import android.widget.Toast;
 import java.text.DateFormatSymbols;
 
 import static android.content.ContentValues.TAG;
-
-/**
- * Created by HP-PC on 6/6/2018.
- */
-
 public class MessageInterceptor extends BroadcastReceiver {
     private Util util;
-
-//    private MainActivity myActivity;
-//
-//    public MessageInterceptor(MainActivity myActivity) {
-//        this.myActivity= myActivity;
-//    }
 
 
     @Override
@@ -98,17 +87,12 @@ public class MessageInterceptor extends BroadcastReceiver {
                             String ScreenWidth = SplitSecond[0];
                             String[] splitLength = SplitSecond[1].split("l");
                             String ScreenLength = SplitSecond[0];
-//                            Log.e(TAG, "Width  1: "+ScreenWidth );
-//                            Log.e(TAG, "Length 2: "+ScreenLength);
 
 
 
                             String[] SplitColorCodes = splitThirdLine[3].split("-");
                             String leftColorCode = SplitColorCodes[0];
                             String rightColorCode = SplitColorCodes[1];
-
-//                            Log.e(TAG, "Left color codes: "+leftColorCode );
-//                            Log.e(TAG, "Right: "+rightColorCode );
 
 
                             final Intent launchIntent = pm.getLaunchIntentForPackage("com.forestsoftware.ven10test");
@@ -152,24 +136,18 @@ public class MessageInterceptor extends BroadcastReceiver {
     private static String StartsWith(String sw) {
         if (sw.matches("(DT:).*")) {
             return sw;
-        } else Log.e(TAG, "StartsWith: Specification not met");
-        ;
+        } ;
 
         return sw;
     }
-
-    ;
 
     private static String StartsWithSZ(String sw) {
         if (sw.matches("(SZ:).*")) {
             return sw;
-        } else Log.e(TAG, "StartsWith: Specification not met");
-        ;
+        };
 
         return sw;
     }
-
-    ;
 
     public String getMonth(int month) {
         return new DateFormatSymbols().getMonths()[month - 1];
