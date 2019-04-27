@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
@@ -102,13 +99,24 @@ public class MessageInterceptor extends BroadcastReceiver {
                             launchIntent.putExtra(Const.YEAR, thisYear);
                             launchIntent.putExtra(Const.MONTH, getMonth(Integer.valueOf(Month)));
                             launchIntent.putExtra(Const.DECENT_TIME, "" + Hour.trim() + ":" + Minute.trim());
-
                             launchIntent.putExtra(Const.WIDTH, ScreenWidth);
                             launchIntent.putExtra(Const.HEIGHT, ScreenLength);
-
-
                             launchIntent.putExtra(Const.FIRST_COLOR_CODES, leftColorCode);
                             launchIntent.putExtra(Const.SECOND_COLOR_CODES, rightColorCode);
+                            util.setDecentTime(launchIntent.getStringExtra(Const.DECENT_TIME));
+                            String message = launchIntent.getStringExtra(Const.MESSAGE);
+
+
+                            util.setMessage(launchIntent.getStringExtra(Const.MESSAGE));
+
+                            util.setHeight(launchIntent.getStringExtra(Const.HEIGHT));
+                            util.setMonth(launchIntent.getStringExtra(Const.MONTH));
+                            util.setDay(launchIntent.getStringExtra(Const.DAY));
+                            util.setYear(launchIntent.getStringExtra(Const.YEAR));
+                            util.setWidth(launchIntent.getStringExtra(Const.WIDTH));
+                            util.setHeight(launchIntent.getStringExtra(Const.HEIGHT));
+                            util.setFirstColorCodes(launchIntent.getStringExtra(Const.FIRST_COLOR_CODES));
+                            util.setSecondColorCodes(launchIntent.getStringExtra(Const.SECOND_COLOR_CODES));
 
 
                             c.startActivity(launchIntent);

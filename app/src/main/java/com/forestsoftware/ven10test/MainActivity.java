@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_RECEIVE_SMS = 0;
     public static final String TAG = MainActivity.class.getSimpleName();
-    private TextView dateTextView,timeTextView,messageTextview;
+    private TextView dateTextView,timeTextView,messageTextview,dimensionText;
     private CardView cardView;
     private Util util;
     private  Intent launchIntent;
@@ -31,9 +31,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         dateTextView = (TextView)findViewById(R.id.date_textview);
         timeTextView = (TextView)findViewById(R.id.time_textview);
+        dimensionText = (TextView)findViewById(R.id.dimension_text);
         messageTextview = (TextView)findViewById(R.id.message_textview);
         cardView = (CardView)findViewById(R.id.cardview);
-//        util = new Util(MainActivity.this);
+        util = new Util(MainActivity.this);
+        init();
 
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS)!= PackageManager.PERMISSION_GRANTED)
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
          launchIntent = getIntent();
         String decentTime = launchIntent.getStringExtra(Const.DECENT_TIME);
         String message = launchIntent.getStringExtra(Const.MESSAGE);
+
         Log.e(TAG, "Before crash: "+launchIntent.getStringExtra(Const.HEIGHT) );
         Log.e(TAG, "Message: "+  launchIntent.getStringExtra("msg"));
         Log.e(TAG, "Month: "+ launchIntent.getStringExtra(Const.MONTH));
@@ -100,8 +103,12 @@ public class MainActivity extends AppCompatActivity {
         if(null != launchIntent &&
                 !TextUtils.isEmpty(launchIntent.getStringExtra("msg"))) {
 
-            int cardHeight = 200;
+            int cardHeight = 0;
             int cardWidth = 200;
+            if(Integer.parseInt(launchIntent.getStringExtra(Const.HEIGHT)) >0){
+                cardHeight = Integer.parseInt(launchIntent.getStringExtra(Const.HEIGHT));
+            }
+
 //            if ( launchIntent.getStringExtra(Const.HEIGHT) != null){
 //                try {
 //                    cardHeight = Integer.valueOf(launchIntent.getStringExtra(Const.HEIGHT));
@@ -122,14 +129,12 @@ public class MainActivity extends AppCompatActivity {
 //            }
 
             LinearLayout.LayoutParams layoutParams= (LinearLayout.LayoutParams) cardView.getLayoutParams();
-            layoutParams.height=  cardHeight == 0 ? 0 : cardHeight  ;
-            layoutParams.width= cardWidth == 0 ? 0 : cardWidth  ;;
             cardView.setLayoutParams(layoutParams);
-            cardView.setBackgroundColor(Color.green(0));
 
             dateTextView.setText(launchIntent.getStringExtra(Const.DAY) + "th " +
                     launchIntent.getStringExtra(Const.MONTH) +" "+launchIntent.getStringExtra(Const.YEAR));
             timeTextView.setText(launchIntent.getStringExtra(Const.DECENT_TIME));
+            dimensionText.setText( launchIntent.getStringExtra(Const.WIDTH) + "x" +launchIntent.getStringExtra(Const.HEIGHT));
 
 
             String changeText = launchIntent.getStringExtra("msg");
@@ -159,6 +164,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+    private void init(){
+        util.getDecentTime();
+        util.getDecentTime();
+        util.getHeight();
+        util.getMonth();
+        util.getDay();
+        util.getYear();
+        util.getWidth();
+        util.getHeight();
+        util.getFirstColorCodes();
+        util.getSecondColorCdes();
     }
 
 
