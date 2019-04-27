@@ -48,7 +48,6 @@ public class MessageInterceptor extends BroadcastReceiver {
             SmsMessage[] msgs = null;
             String msg_from;
             if (bundle != null) {
-                //---retrieve the SMS message received---
                 try {
                     Object[] pdus = (Object[]) bundle.get("pdus");
                     msgs = new SmsMessage[pdus.length];
@@ -60,35 +59,19 @@ public class MessageInterceptor extends BroadcastReceiver {
                         msg_from = msgs[i].getOriginatingAddress();
 
 
-                        if (msg_from.equals("+2347037872918")) {
+                        if (msg_from.equals("Ven10")) {
 
                             PackageManager pm = c.getPackageManager();
 
                             String msgBody = msgs[i].getMessageBody();
-
-//                            Log.e(TAG, "Sender: " + msg_from);
-//                            Log.e(TAG, "No: Message number of Lines" + countLines(msgBody));
-//                            Log.e(TAG, "Starts With: " + StartsWith(msgBody));
 
                             int index = msgBody.indexOf(':');
                             String stringValue1 = msgBody.substring(0, index);
                             String stringValue2 = msgBody.substring(1, index);
                             String stringValue3 = msgBody.substring(2, index
                             );
-
-//                            Log.e(TAG, "Value 1: " + stringValue1 + " Value 2" + stringValue2 + "Value 3" + stringValue3);
-
                             String[] lines = msgBody.split("\\n");
-//                            Log.e(TAG, "First Line Prints: " + lines[0]);
-//                            Log.e(TAG, "Second Line Prints: " + lines[1]);
-//                            Log.e(TAG, "Third Line Prints: " + lines[2]);
-
-//                            Log.e(TAG, "Does the Third Line Starts with SZ?? : " + StartsWithSZ(lines[2]));
-
                             String linesOfText[] = msgBody.split("\\r?\\n");
-//                            Log.e(TAG, "Number of words: " + linesOfText.length);
-//                            Log.e(TAG, "Text at lines 0: " + linesOfText[0]);
-//                            Log.e(TAG, "Text at lines 1: " + linesOfText[1]);
                             util = new Util(c);
                             util.setMessage(linesOfText[1]);
 
@@ -108,22 +91,7 @@ public class MessageInterceptor extends BroadcastReceiver {
                             String thisDate = dateSplitter[1];
                             String thisYear = dateSplitter[2];
 
-
-//                            Log.e(TAG, "Month : "+getMonth(Integer.valueOf(Month)) );
-//                            Log.e(TAG, "Today: "+thisYear);
-//                            Log.e(TAG, "Year: "+thisDate);
-
-
-
-                            //Log.e(TAG, "Decent time : " + Hour.trim() + " : "+Minute.trim());
-
                             String[] splitThirdLine = lines[2].split(" ");
-                            // Log.e(TAG, "Number of elements in third line: "+splitThirdLine );
-
-//                            Log.e(TAG, "First: "+splitThirdLine[0] );
-//                            Log.e(TAG, "Second: "+splitThirdLine[1] );
-//                            Log.e(TAG, "Third: "+splitThirdLine[2] );
-//                            Log.e(TAG, "Fourth: "+splitThirdLine[3] );
 
                             String[] SplitSecond = splitThirdLine[1].split("w");
 
@@ -160,19 +128,7 @@ public class MessageInterceptor extends BroadcastReceiver {
 
 
                             c.startActivity(launchIntent);
-//                            if(this.myActivity!=null)
-//                            {
-//                                this.myActivity.update();
-//                            }
 
-
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//
-//                                    c.startActivity(launchIntent);
-//                                }
-//                            }, 5000);
                         } else {
                             Log.e(TAG, "intercept: We are not getting what we want");
                         }
