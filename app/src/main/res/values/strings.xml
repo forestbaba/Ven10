@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ven10Test</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+</resources>
